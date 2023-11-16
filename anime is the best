@@ -1,0 +1,27 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("I Love anime", "DarkTheme")
+
+-- Main
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+
+MainSection:NewButton("infinite yield", "run", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+MainSection:NewButton("dupe", "save stuff", function()
+    getgenv().olddata = game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings
+    game:GetService("ReplicatedStorage").References.Comm.Events.SetSettings:FireServer(getgenv().olddata)
+end)
+
+MainSection:NewButton("soul duping need wood chest", "dup soul", function()
+    local chest = game:GetService("Workspace").Replicators.NonPassive["Wood Storage Chest"]
+    local putIn = true
+    local itemIDs = {204, 202, 201, 203, 218, 216} -- IDs for Max Soul
+    local Event = game:GetService("ReplicatedStorage").References.Comm.Events.UpdateStorageChest
+
+    for _, itemID in ipairs(itemIDs) do
+        Event:FireServer(chest, putIn, itemID)
+    end
+end)
