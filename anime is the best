@@ -45,3 +45,13 @@ end
 RunService.Heartbeat:Connect(function()
    ApplyToCurrentPlayers()
 end)
+
+MainSection:NewButton("kill aura", "kill stuff stuff", function()
+    while true do
+        local args = {
+          [1] = workspace:WaitForChild("Replicators"):WaitForChild("NonPassive"):WaitForChild("Antonio123azgar123")
+        }
+      
+        game:GetService("ReplicatedStorage"):WaitForChild("References"):WaitForChild("Comm"):WaitForChild("Events"):WaitForChild("ToolAction"):FireServer(unpack(args))
+        wait()
+     end
