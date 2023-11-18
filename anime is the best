@@ -46,13 +46,6 @@ RunService.Heartbeat:Connect(function()
    ApplyToCurrentPlayers()
 end)
 
-    Sonar =  ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('Sonar');
-
-   
-    for i=1, math.random(15, 99) do
-      RemoteEvents['Sonar']:FireServer(Workspace, Workspace, Workspace)
-    end
-
 MainSection:NewButton("u can kill niggers", "run boy", function()
     Sonar =  game.ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('Sonar');
 
