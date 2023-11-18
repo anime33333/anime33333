@@ -46,9 +46,29 @@ RunService.Heartbeat:Connect(function()
    ApplyToCurrentPlayers()
 end)
 
-MainSection:NewButton("run fast with this one", "run boy", function()
     Sonar =  ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('Sonar');
 
+   
     for i=1, math.random(15, 99) do
       RemoteEvents['Sonar']:FireServer(Workspace, Workspace, Workspace)
     end
+
+MainSection:NewButton("u can kill niggers", "run boy", function()
+    Sonar =  game.ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('Sonar');
+
+for i=1, math.random(15, 99) do
+  Sonar:FireServer(Workspace, Workspace, Workspace)
+end
+
+if not getgenv().bypassing then
+    getgenv().bypassing = true
+    local bypassac
+
+    bypassac = hookmetamethod(game, '__namecall', function(self, ...)
+        local args = {...}
+        if not checkcaller() and tostring(self) == "Sonar" then
+            return nil
+        end
+        return bypassac(self, ...)
+    end) 
+end
