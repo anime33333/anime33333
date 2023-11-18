@@ -46,65 +46,9 @@ RunService.Heartbeat:Connect(function()
    ApplyToCurrentPlayers()
 end)
 
-MainSection:NewButton("run for the killer", "kill", function()
-  --Services
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
+MainSection:NewButton("run fast with this one", "run boy", function()
+    Sonar =  ReplicatedStorage:WaitForChild('References'):WaitForChild('Comm'):WaitForChild('Events'):WaitForChild('Sonar');
 
---LocalPlayer
-local LocalPlayer = Players.LocalPlayer
-
---Events
-local ToolAction = ReplicatedStorage:WaitForChild("References"):WaitForChild("Comm"):WaitForChild("Events"):WaitForChild("ToolAction")
-
---KILL AURA KEY
-local KillAuraKey = ["E"] --Change this to your choice; cannot be a special character.
-
-local IsAuraOn = getgenv().AuraOn -- Check if our Aura is on
-
---Functions
-function ToggleKillAura()
-    local IsPlayerAlive(Player) --If the player is alive
-        if Player.Character and Player.Character:FindFirstChild("Humanoid") and Player.Character:FindFirstChild("HumanoidRootPart") and Player.Character:FindFirstChild("Humanoid").Health > 0 then
-            return true --The player is alive
-        end
-        return false --the player is not alive (we need to return false to check that when we call the function, if the player is not alive, we need to tell it that its not true.)
+    for i=1, math.random(15, 99) do
+      RemoteEvents['Sonar']:FireServer(Workspace, Workspace, Workspace)
     end
-
-    local function GetPlayerInRange() --Get the player in range
-        local PlayerInRange --Store the player local
-        local MaxRange = 30 --Max range to attack
-
-        for _, plr in pairs(Players:GetPlayers()) do --Loop through Players
-            if plr ~= LocalPlayer then --Is not yourself
-                if IsPlayerAlive(plr) then --is player alive
-                    local Dist = (LocalPlayer.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position) --get the distance between us and them
-                    if Dist < MaxRange then --if our distance is less than 30 studs, they are valid to get.
-                        PlayerInRange = plr --set the local equal to the valid player
-
-                        return PlayerInRange --return the player
-                    end
-                end
-            end
-        end
-    end
-
-    while true and task.wait() do --task.wait() is extremely fast, we can use a normal infinite loop.
-        if UserInputService:IsKeyDown(Enum.KeyCode[KillAuraKey]) then -- This will be our key to enable the kill aura, when we hold it down.
-            if IsPlayerAlive(LocalPlayer) then --Make sure we are alive.
-                local PlayerInRange = PlayerInRange() --This will get the closest player in range (in this case, 30 studs)
-                local PlayerHumanoid = PlayerInRange:WaitForChild("HumanoidRootPart") --Their humanoid is what we need to hit.
-
-                ToolAction:FireServer(PlayerHumanoid) --Fire the hit event
-            end
-        end
-    end
-end
-
-if not IsAuraOn then --Check if we dont have kill aura on, so we dont stack the infinite loops.
-    ToggleKillAura() --Call the function
-else
-    return
-end
-
-getgenv().AuraOn = true --We now make kill aura on, so we cant repeat anything  
